@@ -1,16 +1,12 @@
+from flask import Flask, request
 import requests
-import random
-import tempfile
-import hashlib
+
+app = Flask(__name__)
+
+@app.route("/greet")
+def greet():
+    name = request.args.get("name", "")
+    return "<h1>Hello " + name + "</h1>"
 
 def fetch(url):
     return requests.get(url, verify=False)
-
-def password_token():
-    return random.randint(0, 999999)
-
-def write_temp():
-    return tempfile.mktemp()
-
-def digest():
-    return hashlib.md5(b"password").hexdigest()
