@@ -1,11 +1,9 @@
-from flask import Flask, request
+from django.http import HttpResponse
 import requests
 
-app = Flask(__name__)
-
-@app.route("/greet")
-def greet():
-    return request.args.get("name", "")
+def greet(request):
+    name = request.GET.get("name", "")
+    return HttpResponse("<h1>Hello " + name + "</h1>")
 
 def fetch(url):
     return requests.get(url, verify=False)
